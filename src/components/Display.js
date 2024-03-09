@@ -17,5 +17,4 @@ export default function Display() {
   );
 }
 
-// create a github for this project
 // get api call to work before we do anymore on the layout/design
