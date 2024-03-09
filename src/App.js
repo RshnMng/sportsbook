@@ -8,8 +8,8 @@ import NHL from "./pages/NHL";
 import MLB from "./pages/MLB";
 import NCAAF from "./pages/NCAAF";
 import NCAAB from "./pages/NCAAB";
+import { util } from "./pages/Utility";
 import "./App.css";
-import { restOfGames, top100Games } from "./trailpage";
 
 function App() {
   const [state, setState] = useState({
@@ -40,34 +40,26 @@ function App() {
     },
   });
 
-  function testgetAllGames() {
-    let topGamesArr = top100Games.results;
-    let restOfGamesArr = restOfGames.results;
-    let allGames = [...topGamesArr, ...restOfGamesArr];
-    return allGames;
+  function setUpPage() {
+    let allGames = state.allGames(state.top100GamesUrl, state.restOfGamesUrl, state.apiOptions, state.getData);
+    let lessThan = allGames.length;
+    let randomNumber = util.createRandomNumber(lessThan);
+    let featuredGame = allGames[randomNumber];
+    util.saveToLocalStorage("featuredGame", featuredGame);
   }
-
-  let allGames = testgetAllGames();
-
-  console.log(allGames);
 
   // **********************************************************************************
   //Test area for trying our code without calling the actual API due to restrictions.
 
   //NEXT STEPS:
-  //  - create a utility js file for utility function like random number, local storage
-  //  - import to this file
-  //  - create a random number function that creates a number between 0 and 200
-  //  - use that random number to select a game that will be our featured game of the day
   //  - begin tentative layout using this featured game using api data
 
   // **********************************************************************************
 
-  //We are going to create a function inside our Try block that runs on page load that will call our API and
-  //handle the data that returns. The code below is the beginning of that function.
+  // setUpPage starts the app and api call;
 
   // try {
-  //  let allGames =  state.allGames(state.top100GamesUrl, state.restOfGamesUrl, state.apiOptions, state.getData);
+  //  setUpPage();
   // } catch (error) {
   //   console.error(error);
   // }
