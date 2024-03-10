@@ -1,6 +1,6 @@
 import React from "react";
 import Team from "../components/Team";
-import { util } from "./Utility";
+import { util } from "../data-and-functions/Utility";
 
 export default function Home() {
   let featuredGame = util.getLocalStorage("featuredGame");
